@@ -180,7 +180,7 @@ const About = ({ treeCardStats }) => {
                   </h2>
                 </div>
                 <p className="text-lg tx-dark lh-lg mt-35 mb-25">
-                  Adaptive Intelligence is a creative agency that help companies amplify their brand presence, engage the right audiences, and turn visibility into measurable results. We partner with startups and Fortune 500 companies alike in delivering strategy, content, and brand experiences.
+                  Adaptive Intelligence is a creative agency that helps companies amplify their brand presence, engage the right audiences, and turn visibility into measurable results. We partner with startups and Fortune 500 companies alike in delivering strategy, content, and brand experiences.
                 </p>
                 <p className="text-lg tx-dark lh-lg mb-35">
                   After securing the #1 position as <a className='alt_link' target='_blank' href="https://www.upwork.com/agencies/adaptiveintelligence/">Upwork's (Nasdaq: $UPWK) Top Creative Agency</a> for three consecutive years, we're on a mission to become the world's leading cloud-based creative agency.
@@ -322,34 +322,52 @@ const About = ({ treeCardStats }) => {
       </section>
       
       {/* NEW: Why Brands Choose Us Section */}
-      <section className="why-choose-us-section fancy-feature-thirtyTwo mt-140 lg-mt-120" style={{background: '#f8f9fa', padding: '120px 0'}}>
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-6 order-lg-last" data-aos="fade-left">
-              <div className="ps-lg-5">
-                <div className="title-style-ten">
-                  <div className="sc-title">CLIENT SUCCESS</div>
-                  <h2 className="main-title font-recoleta fw-normal tx-dark">Why Brands Choose Us.</h2>
-                </div>
-                <p className="text-lg tx-dark lh-lg mt-35 mb-45">Our process is designed for measurable results and long-term partnerships, which is why global leaders trust us with their brands.</p>
-                 <ul className="style-none list-item fs-18">
-                  <li>Proven track record with Nike, Verizon, Vimeo, and Reebok</li>
-                  <li>Upwork’s Top Creative Agency</li>
-                  <li>Full-service strategy, content, and brand development</li>
-                </ul>
-              </div>
-            </div>
-            <div className="col-lg-6 order-lg-first" data-aos="fade-right">
-              <div className="client-logos-wrapper text-center">
-                  <div className="logo-item"><Image src="/images/logo/digital-agency-manhattan-611.png" alt="Nike logo" width={90} height={35} /></div>
-                  <div className="logo-item"><Image src="/images/logo/P-2.svg" alt="Verizon logo" width={120} height={40} /></div>
-                  <div className="logo-item"><Image src="/images/logo/P-3.svg" alt="Vimeo logo" width={110} height={35} /></div>
-                  <div className="logo-item"><Image src="/images/logo/P-4.svg" alt="Reebok logo" width={105} height={40} /></div>
-              </div>
-            </div>
+<section className="why-choose-us-section fancy-feature-thirtyTwo mt-140 lg-mt-120" style={{background: '#f8f9fa', padding: '120px 0'}}>
+  <div className="container">
+    <div className="row">
+      <div className="col-lg-6 order-lg-last" data-aos="fade-left">
+        <div className="ps-lg-5">
+          <div className="title-style-ten">
+            <div className="sc-title">CLIENT SUCCESS</div>
+            <h2 className="main-title font-recoleta fw-normal tx-dark">Why Brands Choose Us.</h2>
+          </div>
+          <p className="text-lg tx-dark lh-lg mt-35 mb-45">Our process is designed for measurable results and long-term partnerships, which is why global leaders trust us with their brands.</p>
+           <ul className="style-none list-item fs-18">
+            <li>Proven track record with Nike, Verizon, Vimeo, and Reebok</li>
+            <li>Upwork's Top Creative Agency</li>
+            <li>Full-service strategy, content, and brand development</li>
+          </ul>
+        </div>
+      </div>
+      <div className="col-lg-6 order-lg-first" data-aos="fade-right">
+        <div className="position-relative">
+          <Image 
+            src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+            alt="Team collaboration and success" 
+            width={600} 
+            height={450} 
+            className="w-100" 
+            style={{ borderRadius: '20px', objectFit: 'cover' }}
+          />
+          {/* Optional overlay with stats or badge */}
+          <div className="position-absolute" style={{ 
+            top: '30px', 
+            right: '30px', 
+            background: 'rgba(255, 255, 255, 0.95)', 
+            padding: '20px 25px', 
+            borderRadius: '15px',
+            boxShadow: '0 10px 30px rgba(0,0,0,0.1)',
+            textAlign: 'center',
+            backdropFilter: 'blur(10px)'
+          }}>
+            <h4 className="m0 tx-dark font-recoleta" style={{ fontSize: '1.5rem', color: '#FF1292' }}>500+</h4>
+            <p className="m0 fs-14 tx-dark" style={{ marginTop: '5px' }}>Projects Delivered</p>
           </div>
         </div>
-      </section>
+      </div>
+    </div>
+  </div>
+</section>
       
       {/* ==================================================================== */}
       {/* END OF REDESIGNED SECTIONS */}
