@@ -21,43 +21,64 @@ export const metadata = {
 };
 
 export async function getStaticProps() {
-  const fallbackData = { trees: 311, acres: 1.2, carbon: 328, bottles: 1674 };
+  const fallbackData = { trees: 332, acres: 1.2, carbon: 348, bottles: 1676 };
   let finalStats = fallbackData;
 
   try {
+    // Updated URL to access the specific sheet by GID and get CSV format
     const sheetId = '1ICb8PWttvv0leKmfmJWXSGhXkZz5UAxChmFamV_bh1c';
-    const url = `https://docs.google.com/sheets/d/${sheetId}/gviz/tq?tqx=out:csv&sheet=Sheet1`;
+    const gid = '859204154'; // The specific sheet GID from your URL
+    const url = `https://docs.google.com/spreadsheets/d/${sheetId}/export?format=csv&gid=${gid}`;
+    
+    
     const response = await fetch(url);
     
-    if (response.ok) {
-      const csvText = await response.text();
-      const rows = csvText.replace(/"/g, '').split('\n');
-      const parsedData = {};
-      
-      rows.forEach(row => {
-        const [key, value] = row.split(',');
-        if (key && value) {
-          parsedData[key.trim().toLowerCase()] = parseFloat(value.trim());
-        }
-      });
-
-      if (parsedData.trees && parsedData.acres && parsedData.carbon && parsedData.bottles) {
-        finalStats = parsedData;
+    if (!response.ok) {
+        throw new Error(`Failed to fetch Google Sheet: ${response.status} ${response.statusText}`);
+    }
+    
+    const csvText = await response.text();
+    
+    const rows = csvText.split('\n');
+    
+    let totalsRow = null;
+    let totalsRowIndex = -1;
+    
+    // Find the row that contains "TOTALS"
+    for (let i = 0; i < rows.length; i++) {
+      console.log(`🔍 [About TreeCard] Checking row ${i}:`, rows[i]);
+      if (rows[i].includes('TOTALS')) {
+        totalsRow = rows[i].split(',');
+        totalsRowIndex = i;
+        break;
       }
     }
+    
+    if (totalsRow && totalsRow.length >= 5) {
+      const parsedData = {
+        trees: parseInt(totalsRow[1].replace(/"/g, '').trim()) || fallbackData.trees,
+        acres: parseFloat(totalsRow[2].replace(/"/g, '').trim()) || fallbackData.acres,
+        carbon: parseInt(totalsRow[3].replace(/"/g, '').trim()) || fallbackData.carbon,
+        bottles: parseInt(totalsRow[4].replace(/"/g, '').trim()) || fallbackData.bottles
+      };
+
+      
+      finalStats = parsedData;
+    } else {
+      console.warn("⚠️ [About TreeCard] Could not find TOTALS row in Google Sheet data. Using fallback data.");
+    }
+
   } catch (error) {
-    // Silently fall back to default data
-    console.log('Using fallback data for sustainability stats');
+    console.error('❌ [About TreeCard] Full error:', error);
   }
 
   return {
     props: {
       treeCardStats: finalStats,
     },
-    revalidate: 3600,
+    revalidate: 1, // Re-generate the page every 1 second for testing
   };
 }
-
 const About = ({ treeCardStats }) => {
   return (
     <>

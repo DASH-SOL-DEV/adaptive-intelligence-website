@@ -17,17 +17,15 @@ const customStyle = {
     desktop: {
       xOffset: '15',
       yOffset: '15',
-      position: 'bl'
+      position: 'br' // bottom-right
     },
-
     mobile: {
       xOffset: 15,
       yOffset: 15,
-      position: 'bl'
+      position: 'br' // bottom-right
     }
   }
 };
-
 function App({ Component, pageProps, emotionCache = clientSideEmotionCache }) {
   const contentHeightFixed = Component.contentHeightFixed ?? false
   const getLayout = Component.getLayout ?? (page => <BaseLayout contentHeightFixed={contentHeightFixed}>{page}</BaseLayout>)

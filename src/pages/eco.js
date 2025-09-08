@@ -294,44 +294,68 @@ const EcoPage = ({ treeCardStats }) => {
 };
 
 export async function getStaticProps() {
-  const fallbackData = { trees: 311, acres: 1.2, carbon: 328, bottles: 1674 };
+  const fallbackData = { trees: 332, acres: 1.2, carbon: 348, bottles: 1676 };
   let finalStats = fallbackData;
 
+
   try {
+    // Updated URL to access the specific sheet by GID and get CSV format
     const sheetId = '1ICb8PWttvv0leKmfmJWXSGhXkZz5UAxChmFamV_bh1c';
-    const url = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv&sheet=Sheet1`;
+    const gid = '859204154'; // The specific sheet GID from your URL
+    const url = `https://docs.google.com/spreadsheets/d/${sheetId}/export?format=csv&gid=${gid}`;
+    
     const response = await fetch(url);
+    
     if (!response.ok) {
-        throw new Error(`Failed to fetch Google Sheet: ${response.statusText}`);
+        throw new Error(`Failed to fetch Google Sheet: ${response.status} ${response.statusText}`);
     }
     
     const csvText = await response.text();
-    const rows = csvText.replace(/"/g, '').split('\n');
-    const parsedData = {};
-    rows.forEach(row => {
-      const [key, value] = row.split(',');
-      if (key && value) {
-        parsedData[key.trim().toLowerCase()] = parseFloat(value.trim());
+    
+    // Parse the CSV - looking for the TOTALS row (row 10)
+    const rows = csvText.split('\n');
+    
+    let totalsRow = null;
+    let totalsRowIndex = -1;
+    
+    // Find the row that contains "TOTALS"
+    for (let i = 0; i < rows.length; i++) {
+      console.log(`🔍 [TreeCard] Checking row ${i}:`, rows[i]);
+      if (rows[i].includes('TOTALS')) {
+        totalsRow = rows[i].split(',');
+        totalsRowIndex = i;
+        break;
       }
-    });
-
-    // Ensure all required keys exist, otherwise use fallback
-    if (parsedData.trees !== undefined && parsedData.acres !== undefined && parsedData.carbon !== undefined && parsedData.bottles !== undefined) {
-        finalStats = parsedData;
+    }
+    
+    if (totalsRow && totalsRow.length >= 5) {
+    
+      // Parse the values from the totals row
+      // Row structure: Name, Trees Planted, Area Covered (ACRES), Carbon Absorbed (TONS), Ocean Plastic Bottles Removed
+      const parsedData = {
+        trees: parseInt(totalsRow[1].replace(/"/g, '').trim()) || fallbackData.trees,
+        acres: parseFloat(totalsRow[2].replace(/"/g, '').trim()) || fallbackData.acres,
+        carbon: parseInt(totalsRow[3].replace(/"/g, '').trim()) || fallbackData.carbon,
+        bottles: parseInt(totalsRow[4].replace(/"/g, '').trim()) || fallbackData.bottles
+      };
+      
+      
+      finalStats = parsedData;
     } else {
-        console.warn("Parsed Google Sheet data was incomplete. Using fallback data.");
+      console.warn("⚠️ [TreeCard] Could not find TOTALS row in Google Sheet data. Using fallback data.");
     }
 
   } catch (error) {
-    console.error('Error in getStaticProps for Eco page:', error.message);
+    console.error('❌ [TreeCard] Full error:', error);
     // On error, we'll use the hardcoded fallback data
   }
+
 
   return {
     props: {
       treeCardStats: finalStats,
     },
-    revalidate: 3600, // Re-generate the page at most once per hour
+    revalidate: 1, // Re-generate the page every 1 second for testing
   };
 }
 
