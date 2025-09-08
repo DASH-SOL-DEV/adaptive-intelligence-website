@@ -18,11 +18,11 @@ export const resourceDatabase = {
     tags: ['Brand Identity', 'UX/UI Copywriting', 'PPC Strategy', 'Influencer Marketing'],
     duration: 'Launch Campaign',
     featured: true,
-    heroImage: '/images/case-studies/unnamed.png', // Placeholder path for the new image
+    heroImage: '/images/case-studies/myMood AI.jpg', // Placeholder path for the new image
     
     // --- Download Info ---
-    fileName: 'MyMood_AI_Case_Study.pdf',
-    downloadName: 'MyMood_AI_Case_Study.pdf',
+    fileName: 'MyMood AI Case Study_20250902_094121_0000.pdf',
+    downloadName: 'MyMood AI Case Study_20250902_094121_0000.pdf',
     nextStepsCTA: 'launch your app',
     
     // --- Page Content ---
@@ -70,8 +70,8 @@ export const resourceDatabase = {
     heroImage: '/images/case-studies/InfStones.png',
     
     // --- Download Info ---
-    fileName: 'InfStones_Case_Study.pdf',
-    downloadName: 'InfStones_Case_Study.pdf',
+    fileName: 'Adaptive Intelligence — InfStones Case Study_20250902_094057_0000.pdf',
+    downloadName: 'Adaptive Intelligence — InfStones Case Study_20250902_094057_0000.pdf',
     nextStepsCTA: 'create your success story',
     
     // --- Page Content ---
@@ -121,8 +121,8 @@ export const resourceDatabase = {
     heroImage: '/images/case-studies/unnamed.png',
     
     // --- Download Info ---
-    fileName: 'Market_Trend_Report_2025.pdf',
-    downloadName: '2025_Marketing_Trends_Report.pdf',
+    fileName: '2025 Market Trend Report_20250902_094215_0000.pdf',
+    downloadName: '2025 Market Trend Report_20250902_094215_0000.pdf',
     nextStepsCTA: 'implement these insights',
     
     // --- Page Content ---
