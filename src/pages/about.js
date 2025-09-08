@@ -180,7 +180,7 @@ const About = ({ treeCardStats }) => {
                   </h2>
                 </div>
                 <p className="text-lg tx-dark lh-lg mt-35 mb-25">
-                  Adaptive Intelligence is a creative agency that helps companies amplify their brand presence, engage the right audiences, and turn visibility into measurable results. We partner with startups and Fortune 500 companies alike in delivering strategy, content, and brand experiences.
+                  Adaptive Intelligence is a creative agency that help companies amplify their brand presence, engage the right audiences, and turn visibility into measurable results. We partner with startups and Fortune 500 companies alike in delivering strategy, content, and brand experiences.
                 </p>
                 <p className="text-lg tx-dark lh-lg mb-35">
                   After securing the #1 position as <a className='alt_link' target='_blank' href="https://www.upwork.com/agencies/adaptiveintelligence/">Upwork's (Nasdaq: $UPWK) Top Creative Agency</a> for three consecutive years, we're on a mission to become the world's leading cloud-based creative agency.
